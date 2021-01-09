@@ -1,10 +1,33 @@
 import React from 'react'
 import {View, Text, FlatList, StyleSheet} from 'react-native'
+import moment from 'moment'
 
-import {CardQuestion} from '../../components'
+import {CardQuestion, Tag} from '../../components'
 import colors from '../../theme/colors'
 
-const questions: object[] = [
+interface Styles {
+  screen: object,
+  card: object,
+  stats: object,
+  statsText: object,
+  details: object,
+  title: object,
+  tags: object,
+  tag: object,
+  createdAt: object
+}
+
+interface Questions {
+  readonly id: number, 
+  title: string,
+  votes: number,
+  answers: number,
+  views: number,
+  tags: string[],
+  createdAt: string
+}
+
+const questions: Questions[] = [
   {
     id: 1,
     title: 'What do these three dots in React do?',
@@ -12,7 +35,7 @@ const questions: object[] = [
     answers: 2,
     views: 17,
     tags: ['javascript', 'react'],
-    date_published: '2021-01-08T16:52:34+06:00'
+    createdAt: '2021-01-08T16:52:34+06:00'
   },
   {
     id: 2,
@@ -21,7 +44,7 @@ const questions: object[] = [
     answers: 3,
     views: 6,
     tags: ['react'],
-    date_published: '2020-01-08T16:52:34+06:00'
+    createdAt: '2020-01-08T16:52:34+06:00'
   },
   {
     id: 3,
@@ -30,22 +53,9 @@ const questions: object[] = [
     answers: 3,
     views: 20,
     tags: ['react'],
-    date_published: '2020-12-08T16:52:34+06:00'
+    createdAt: '2020-12-08T16:52:34+06:00'
   }
 ]
-
-interface Styles {
-  screen: object
-}
-
-interface Item {
-  title: string
-  votes: number
-  answers: number
-  views: number
-  tags: string[]
-  data_published: string
-}
 
 const styles: Styles = StyleSheet.create({
   screen: {
@@ -54,55 +64,64 @@ const styles: Styles = StyleSheet.create({
   card: {
     flexDirection: 'row'
   },
-  statistics: {
+  stats: {
     width: '20%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  statisticsText: {
-    fontSize: 16,
+  statsText: {
+    fontSize: 18,
   },
   details: {
     width: '80%',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    padding: 10
   },
   title: {
     fontSize: 22,
-    color: colors.darkBlue
+    color: colors.darkBlue,
+    marginBottom: 6
   },
   tags: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginBottom: 6
   },
-  datePublished: {
+  tag: {
+    marginRight: 6
+  },
+  createdAt: {
     textAlign: 'right'
   }
 })
 
 export default function Home() {
-  const handlePressCard = () => console.log('press card')
+  const handlePressCard = (): void => console.log('press card')
 
   return (
     <View style={styles.screen}>
       <FlatList
         keyExtractor={(item: {id: any}) => item.id}
         data={questions}
-        renderItem={(itemData: {item: any}) => (
-          <CardQuestion onPressCard={handlePressCard} customStyle={styles.card}>
-            <View style={styles.statistics}>
-              <Text style={styles.statisticsText}>{itemData.item.votes}</Text>
-              <Text style={styles.statisticsText}>{itemData.item.answers}</Text>
-              <Text style={styles.statisticsText}>{itemData.item.views}</Text>
+        renderItem={(itemData: {item: Questions, index: number}) => (
+          <CardQuestion
+            onPressCard={handlePressCard}
+            customStyle={styles.card}
+          >
+            <View style={styles.stats}>
+              <Text style={styles.statsText}>{itemData.item.votes}</Text>
+              <Text style={styles.statsText}>{itemData.item.answers}</Text>
+              <Text style={styles.statsText}>{itemData.item.views}</Text>
             </View>
             <View style={styles.details}>
               <Text style={styles.title}>{itemData.item.title}</Text>
               <View style={styles.tags}>
                 {itemData.item.tags.map((tag: string, index: number) => (
-                  <Text key={index}>{tag}</Text>
+                  <Tag key={index} customStyle={styles.tag}>{tag}</Tag>
                 ))}
               </View>
-              <Text style={styles.datePublished}>
-                {itemData.item.date_published}
+              <Text style={styles.createdAt}>
+                asked {moment(itemData.item.createdAt).fromNow()}
               </Text>
             </View>
           </CardQuestion>

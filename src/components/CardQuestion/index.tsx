@@ -1,22 +1,22 @@
-import React, { ReactChildren } from 'react';
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import React from 'react'
+import {TouchableOpacity, StyleSheet} from 'react-native'
 
-import colors from '../../theme/colors';
+import colors from '../../theme/colors'
 
 interface Styles {
   card: object
-};
+}
 
 interface ComponentProps {
-  children: ReactChildren,
+  children: JSX.Element | JSX.Element[],
   customStyle?: object,
-  onPressCard: Function,
-};
+  onPressCard: VoidFunction,
+}
 
 const styles: Styles = StyleSheet.create({
   card: {
     marginHorizontal: 16,
-    marginTop: 20,
+    marginVertical: 10,
     borderTopWidth: 2,
     borderTopColor: colors.orange,
     borderRadius: 10,
@@ -29,8 +29,8 @@ const styles: Styles = StyleSheet.create({
     shadowRadius: 5.46,
     elevation: 9,
     backgroundColor: 'white'
-  },
-});
+  }
+})
 
 export default function(props: ComponentProps) {
   const {children, customStyle, onPressCard} = props;
@@ -42,5 +42,5 @@ export default function(props: ComponentProps) {
     >
       {children}
     </TouchableOpacity>
-  );
-};
+  )
+}
