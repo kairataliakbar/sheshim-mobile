@@ -1,46 +1,110 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Ionicons} from '@expo/vector-icons';
+import React from 'react'
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {Ionicons} from '@expo/vector-icons'
+import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 
-import Home from '../views/Home';
-import Sheshim from '../views/Sheshim';
-import Users from '../views/Users';
-import Profile from '../views/Profile';
+import Home from '../views/Home'
+import Sheshim from '../views/Sheshim'
+import Users from '../views/Users'
+import Profile from '../views/Profile'
 
-import colors from '../theme/colors';
+import colors from '../theme/colors'
 
-const Tab = createBottomTabNavigator();
+import {CustomHeaderButton} from '../components'
+
+const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 const tabIcons: any = {
   Home: 'ios-home',
   Sheshim: 'ios-rocket',
   Users: 'ios-people',
-  Profile: 'ios-person',
-};
+  Profile: 'ios-person'
+}
+
+function HomeNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: 'Top Questions',
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+              <Item
+                title="Add"
+                iconName="ios-add-circle"
+                onPress={() => {}}
+              />
+            </HeaderButtons>
+          )
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function SheshimNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Sheshim"
+        component={Sheshim}
+        options={{
+          title: 'All Questions',
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+              <Item
+                title="Add"
+                iconName="ios-add-circle"
+                onPress={() => {}}
+              />
+            </HeaderButtons>
+          )
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function UsersNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Users" component={Users} />
+    </Stack.Navigator>
+  )
+}
+
+function ProfileNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  )
+}
 
 export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false,
-        }}
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => (
             <Ionicons
               name={tabIcons[route.name]}
-              size={26}
+              size={focused ? 28 : 26}
               color={focused ? colors.primary : colors.black}
             />
-          ),
+          )
         })}
       >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Sheshim" component={Sheshim} />
-        <Tab.Screen name="Users" component={Users} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Home" component={HomeNavigation} />
+        <Tab.Screen name="Sheshim" component={SheshimNavigation} />
+        <Tab.Screen name="Users" component={UsersNavigation} />
+        <Tab.Screen name="Profile" component={ProfileNavigation} />
       </Tab.Navigator>
     </NavigationContainer>
-  );
+  )
 }
