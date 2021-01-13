@@ -1,11 +1,11 @@
 import CustomHeaderButton from './CustomHeaderButton'
-import CardQuestion from './CardQuestion'
+import Card from './Card'
 import Tag from './Tag'
 import CardState from './CardState'
 
 export {
   CustomHeaderButton,
-  CardQuestion,
+  Card,
   Tag,
   CardState
 }

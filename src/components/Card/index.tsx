@@ -3,17 +3,13 @@ import {TouchableOpacity, StyleSheet} from 'react-native'
 
 import colors from '../../theme/colors'
 
-interface Styles {
-  card: object
-}
-
-interface ComponentProps {
+interface Props {
   children: JSX.Element | JSX.Element[],
   customStyle?: object,
   onPressCard: VoidFunction,
 }
 
-const styles: Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   card: {
     marginHorizontal: 16,
     marginVertical: 10,
@@ -32,7 +28,7 @@ const styles: Styles = StyleSheet.create({
   }
 })
 
-export default function(props: ComponentProps) {
+export default function(props: Props) {
   const {children, customStyle, onPressCard} = props;
 
   return (

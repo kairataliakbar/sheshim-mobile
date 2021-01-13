@@ -9,6 +9,8 @@ import Home from '../views/Home'
 import Sheshim from '../views/Sheshim'
 import Users from '../views/Users'
 import Profile from '../views/Profile'
+import NewQuestion from '../views/NewQuestion'
+import DetailsQuestion from '../views/DetailsQuestion'
 
 import colors from '../theme/colors'
 
@@ -24,6 +26,16 @@ const tabIcons: any = {
   Profile: 'ios-person'
 }
 
+const addQuestionButton = () => (
+  <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+    <Item
+      title="Add"
+      iconName="ios-add-circle"
+      onPress={() => {}}
+    />
+  </HeaderButtons>
+)
+
 function HomeNavigation() {
   return (
     <Stack.Navigator>
@@ -32,16 +44,21 @@ function HomeNavigation() {
         component={Home}
         options={{
           title: 'Top Questions',
-          headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-              <Item
-                title="Add"
-                iconName="ios-add-circle"
-                onPress={() => {}}
-              />
-            </HeaderButtons>
-          )
+          headerRight: addQuestionButton
         }}
+      />
+      <Stack.Screen
+        name="DetailsQuestion"
+        component={DetailsQuestion}
+        options={{
+          title: 'Details Question',
+          headerRight: () => addQuestionButton
+        }}
+      />
+      <Stack.Screen
+        name="NewQuestion"
+        component={NewQuestion}
+        options={{title: 'New Question'}}
       />
     </Stack.Navigator>
   )
@@ -55,16 +72,21 @@ function SheshimNavigation() {
         component={Sheshim}
         options={{
           title: 'All Questions',
-          headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-              <Item
-                title="Add"
-                iconName="ios-add-circle"
-                onPress={() => {}}
-              />
-            </HeaderButtons>
-          )
+          headerRight: () => addQuestionButton
         }}
+      />
+      <Stack.Screen
+        name="DetailsQuestion"
+        component={DetailsQuestion}
+        options={{
+          title: 'Details Question',
+          headerRight: () => addQuestionButton
+        }}
+      />
+      <Stack.Screen
+        name="NewQuestion"
+        component={NewQuestion}
+        options={{title: 'New Question'}}
       />
     </Stack.Navigator>
   )
