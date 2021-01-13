@@ -2,20 +2,8 @@ import React from 'react'
 import {View, Text, FlatList, StyleSheet} from 'react-native'
 import moment from 'moment'
 
-import {CardQuestion, Tag} from '../../components'
+import {CardQuestion, Tag, CardState} from '../../components'
 import colors from '../../theme/colors'
-
-interface Styles {
-  screen: object,
-  card: object,
-  stats: object,
-  statsText: object,
-  details: object,
-  title: object,
-  tags: object,
-  tag: object,
-  createdAt: object
-}
 
 interface Questions {
   readonly id: number, 
@@ -41,7 +29,7 @@ const questions: Questions[] = [
     id: 2,
     title: 'What is jsx?',
     votes: 3,
-    answers: 3,
+    answers: 310,
     views: 6,
     tags: ['react'],
     createdAt: '2020-01-08T16:52:34+06:00'
@@ -57,7 +45,7 @@ const questions: Questions[] = [
   }
 ]
 
-const styles: Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   screen: {
     flex: 1
   },
@@ -65,17 +53,16 @@ const styles: Styles = StyleSheet.create({
     flexDirection: 'row'
   },
   stats: {
-    width: '20%',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  statsText: {
-    fontSize: 18,
+    alignItems: 'flex-end'
   },
   details: {
-    width: '80%',
+    flex: 1,
     flexDirection: 'column',
-    padding: 10
+    paddingVertical: 10,
+    paddingRight: 20
   },
   title: {
     fontSize: 22,
@@ -109,9 +96,9 @@ export default function Home() {
             customStyle={styles.card}
           >
             <View style={styles.stats}>
-              <Text style={styles.statsText}>{itemData.item.votes}</Text>
-              <Text style={styles.statsText}>{itemData.item.answers}</Text>
-              <Text style={styles.statsText}>{itemData.item.views}</Text>
+              <CardState label={itemData.item.votes} iconName="md-arrow-up" iconColor="#21ba45" />
+              <CardState label={itemData.item.answers} iconName="ios-chatbubbles" iconColor={colors.black} />
+              <CardState label={itemData.item.views} iconName="ios-eye" iconColor={colors.black} />
             </View>
             <View style={styles.details}>
               <Text style={styles.title}>{itemData.item.title}</Text>
