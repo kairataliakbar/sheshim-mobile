@@ -26,12 +26,12 @@ const tabIcons: any = {
   Profile: 'ios-person'
 }
 
-const addQuestionButton = () => (
+const addQuestionButton = ({navigation}: any) => (
   <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
     <Item
       title="Add"
       iconName="ios-add-circle"
-      onPress={() => {}}
+      onPress={() => navigation.navigate('NewQuestion')}
     />
   </HeaderButtons>
 )
@@ -42,18 +42,18 @@ function HomeNavigation() {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{
+        options={(navigation) => ({
           title: 'Top Questions',
-          headerRight: addQuestionButton
-        }}
+          headerRight: () => addQuestionButton(navigation)
+        })}
       />
       <Stack.Screen
         name="DetailsQuestion"
         component={DetailsQuestion}
-        options={{
+        options={(navigation) => ({
           title: 'Details Question',
-          headerRight: () => addQuestionButton
-        }}
+          headerRight: () => addQuestionButton(navigation)
+        })}
       />
       <Stack.Screen
         name="NewQuestion"
@@ -70,18 +70,18 @@ function SheshimNavigation() {
       <Stack.Screen
         name="Sheshim"
         component={Sheshim}
-        options={{
+        options={(navigation) => ({
           title: 'All Questions',
-          headerRight: () => addQuestionButton
-        }}
+          headerRight: () => addQuestionButton(navigation)
+        })}
       />
       <Stack.Screen
         name="DetailsQuestion"
         component={DetailsQuestion}
-        options={{
+        options={(navigation) => ({
           title: 'Details Question',
-          headerRight: () => addQuestionButton
-        }}
+          headerRight: () => addQuestionButton(navigation)
+        })}
       />
       <Stack.Screen
         name="NewQuestion"
