@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 export default function CardState(props: Props) {
-  const {label, iconColor, iconName} = props;
+  const {label, iconColor, iconName} = props
   return (
     <View style={styles.stats}>
       <Text style={styles.statsText}>{label}</Text>
