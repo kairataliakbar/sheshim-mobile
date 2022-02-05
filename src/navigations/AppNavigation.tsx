@@ -3,7 +3,6 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {Ionicons} from '@expo/vector-icons'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 
 import Home from '../views/Home'
 import Sheshim from '../views/Sheshim'
@@ -14,27 +13,16 @@ import DetailsQuestion from '../views/DetailsQuestion'
 
 import colors from '../theme/colors'
 
-import {CustomHeaderButton} from '../components'
-
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-const tabIcons: any = {
+const tabIcons: { [key: string]: string } = {
   Home: 'ios-home',
   Sheshim: 'ios-rocket',
+  Add: 'ios-add-circle',
   Users: 'ios-people',
   Profile: 'ios-person'
 }
-
-const addQuestionButton = ({navigation}: any) => (
-  <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-    <Item
-      title="Add"
-      iconName="ios-add-circle"
-      onPress={() => navigation.navigate('NewQuestion')}
-    />
-  </HeaderButtons>
-)
 
 function HomeNavigation() {
   return (
@@ -42,18 +30,12 @@ function HomeNavigation() {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={(navigation) => ({
-          title: 'Top Questions',
-          headerRight: () => addQuestionButton(navigation)
-        })}
+        options={{title: 'Top Questions'}}
       />
       <Stack.Screen
         name="DetailsQuestion"
         component={DetailsQuestion}
-        options={(navigation) => ({
-          title: 'Details Question',
-          headerRight: () => addQuestionButton(navigation)
-        })}
+        options={{title: 'Details Question'}}
       />
       <Stack.Screen
         name="NewQuestion"
@@ -70,18 +52,12 @@ function SheshimNavigation() {
       <Stack.Screen
         name="Sheshim"
         component={Sheshim}
-        options={(navigation) => ({
-          title: 'All Questions',
-          headerRight: () => addQuestionButton(navigation)
-        })}
+        options={{title: 'All Questions'}}
       />
       <Stack.Screen
         name="DetailsQuestion"
         component={DetailsQuestion}
-        options={(navigation) => ({
-          title: 'Details Question',
-          headerRight: () => addQuestionButton(navigation)
-        })}
+        options={{title: 'Details Question'}}
       />
       <Stack.Screen
         name="NewQuestion"
@@ -108,6 +84,14 @@ function ProfileNavigation() {
   )
 }
 
+function AddNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Add" component={NewQuestion} />
+    </Stack.Navigator>
+  )
+}
+
 export default function AppNavigation() {
   return (
     <NavigationContainer>
@@ -124,6 +108,7 @@ export default function AppNavigation() {
       >
         <Tab.Screen name="Home" component={HomeNavigation} />
         <Tab.Screen name="Sheshim" component={SheshimNavigation} />
+        <Tab.Screen name="Add" component={AddNavigation} />
         <Tab.Screen name="Users" component={UsersNavigation} />
         <Tab.Screen name="Profile" component={ProfileNavigation} />
       </Tab.Navigator>

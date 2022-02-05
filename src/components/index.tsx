@@ -1,8 +1,8 @@
 import CustomHeaderButton from './CustomHeaderButton'
-import Card from './Card'
+import Card from './cards/Card'
 import Tag from './Tag'
-import CardState from './CardState'
-import Input from './Inputs/Input'
+import CardState from './cards/CardState'
+import Input from './inputs/Input'
 
 export {
   CustomHeaderButton,

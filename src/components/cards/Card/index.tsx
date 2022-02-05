@@ -1,7 +1,7 @@
 import React from 'react'
 import {TouchableOpacity, StyleSheet} from 'react-native'
 
-import colors from '../../theme/colors'
+import colors from '../../../theme/colors'
 
 interface Props {
   children: JSX.Element | JSX.Element[],

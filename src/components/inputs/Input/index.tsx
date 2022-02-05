@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, TextInput} from 'react-native'
 
-import colors from '../../theme/colors'
+import colors from '../../../theme/colors'
 
 interface Styles {
   input: object
