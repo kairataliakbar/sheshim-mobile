@@ -1,6 +1,6 @@
-import {Questions} from './index';
+import {Question} from './index';
 
-export const questions: Questions[] = [
+export const questions: Question[] = [
   {
     id: 1,
     title: 'What do these three dots in React do?',

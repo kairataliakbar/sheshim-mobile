@@ -1,4 +1,4 @@
-export interface Questions {
+export interface Question {
   readonly id: number, 
   title: string,
   votes: number,

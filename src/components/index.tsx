@@ -1,7 +1,7 @@
 import CustomHeaderButton from './CustomHeaderButton'
-import Card from './cards/Card'
+import Card from './Card'
 import Tag from './Tag'
-import CardState from './cards/CardState'
+import CardState from './CardState'
 import Input from './inputs/Input'
 
 export {

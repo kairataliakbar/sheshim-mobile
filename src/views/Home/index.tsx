@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import {Card, Tag, CardState} from '../../components'
 import colors from '../../theme/colors'
-import {Questions, Navigation} from '../../models'
+import {Question, Navigation} from '../../models'
 import {questions} from '../../models/mock'
 
 const styles = StyleSheet.create({
@@ -52,7 +52,7 @@ export default function Home({navigation}: {navigation: Navigation}) {
       <FlatList
         keyExtractor={(item: {id: any}) => item.id}
         data={questions}
-        renderItem={(itemData: {item: Questions, index: number}) => (
+        renderItem={(itemData: {item: Question, index: number}) => (
           <Card
             onPressCard={handlePressCard}
             customStyle={styles.card}
